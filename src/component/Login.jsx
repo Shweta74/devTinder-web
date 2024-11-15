@@ -8,6 +8,7 @@ import { Base_url } from '../utils/constants';
 const Login = () => {
   const[emailId, setEmailId]= useState("Damodar@gmail.com");
   const[password, setPassword]= useState("Dhruv_1993");
+  const[error, setError] = useState("")
   const dispatch=useDispatch();
   const navigate= useNavigate();
   const emailHandler=(e)=>{
@@ -27,7 +28,8 @@ const Login = () => {
     return navigate("/")
    }
    catch(err){
-    console.log(err)
+    setError(err?.response?.data || "something went wrong")
+
    }
   }
   return (
@@ -50,7 +52,7 @@ const Login = () => {
           <input type="text" value={password}  onChange={passwordHandler}
           className="input input-bordered w-full max-w-xs" />
         </label>
-      </div>
+      </div><p className='text-red-500'>{error}</p>
       <div className="card-actions justify-end m-2">
         <button className="btn btn-primary" onClick={loginHandler}>Login</button>
       </div>
