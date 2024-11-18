@@ -21,8 +21,11 @@
 -Refactor our code to add constants file + create a components folder
 -You shoulld notbe access other routes without login
 -if token is not present, redirect user to login page
--logout
--create profile page
+-logout Feature
+-get the feeed and add the feed in the store
+- build the user card on feed
+-edit profile feature
+-show toast message on save of profile
 Body 
     NavBar
     Route=/ => Feed
