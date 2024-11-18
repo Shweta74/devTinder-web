@@ -26,17 +26,17 @@ const Connections = () => {
         return <h1>No connections Found</h1>
     }
   return (
-    <div className='text-center my-10'>
+    <div  className='text-center my-10'>
         <h1 className='text-bold text-3xl text-black'>Connections</h1>
         {connections.map((connection)=>{
-            const {firstName, lastName, photoUrl, age, gender, about, skills
+            const {_id, firstName, lastName, photoUrl, age, gender, about, skills
             }= connection;
           return  (
-                <div className=' flex m-4 p-4 border rounded-lg bg-base-300 w-1/2 mx-auto'>
+                <div key={_id} className=' flex m-4 p-4 border rounded-lg bg-base-300 w-1/2 mx-auto'>
                     <div><img alt="photo" className="w-20 h-20 rounded-full" src={photoUrl}/></div>
                     <div className='text-left mx-4'>
                     <h2 className='font-bold text-xl'>{firstName + " " + lastName}</h2>
-                    <h2>{age + " " + gender}</h2>
+                    {age && gender && <p>{age + "," + gender}</p>}
 
                      <p>{about}</p>
                     </div>
