@@ -2,10 +2,25 @@ import React, { useEffect } from 'react'
 import { Base_url } from '../utils/constants'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { addRequests } from '../utils/requestSlice'
+import { addRequests, removeRequest } from '../utils/requestSlice'
 const Request = () =>{
     const dispatch= useDispatch()
     const request =useSelector((store) => store.request)
+    
+    const reviewRequest = async(status, _id)=>{
+        try{
+            const res= axios.post(
+                Base_url+ "/request/review/" + status + "/" + _id,
+                {},
+                {withCredentials :true}
+            )
+            dispatch(removeRequest(_id))
+        }catch(err){
+            console.log(err)
+        }
+    }
+    
+    
     const fetchRequest = async()=>{
         try{
             const res=await axios.get(Base_url + "/user/requests/recieved", {
@@ -22,12 +37,12 @@ const Request = () =>{
     },[])
     if(!request) return;
 
-    if(request.length=== 0){
-        return <h1>No request Found</h1>
-    }
+    // if(request.length=== 0){
+    //     return <h1>No request Found</h1>
+    // }
   return (
     <div className='text-center my-10'>
-        <h1 className='text-bold text-3xl text-black'>Requests</h1>
+        <h1 className='text-bold text-3xl text-black'>Connection Requests</h1>
         {request.map((request)=>{
             const {_id, firstName, lastName, photoUrl, age, gender, about, skills
             }= request.fromUserId;
@@ -41,8 +56,8 @@ const Request = () =>{
                      <p>{about}</p>
                      
                     </div>
-                    <div><button class="btn btn-primary mx-1">Reject</button>
-                     <button class="btn btn-secondary mx-1">Accept</button></div>
+                    <div><button className="btn btn-primary mx-1" onClick={()=> reviewRequest("rejected", request._id)}>Reject</button>
+                     <button className="btn btn-secondary mx-1" onClick={()=> reviewRequest("accepted", request._id)}>Accept</button></div>
                 </div>
         )
         })}

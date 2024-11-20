@@ -47,6 +47,10 @@ const NavBar = () => {
               Profile
               <span className="badge">New</span>
             </Link>
+            <Link to="/feed" className="justify-between">
+              Feeds
+              
+            </Link>
             <Link to="/connections" className="justify-between">
               Connections
               
