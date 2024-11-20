@@ -90,7 +90,7 @@ const Login = () => {
           <div className="label">
             <span className="label-text">Password</span>
           </div>
-          <input type="text" value={password} onChange={passwordHandler}
+          <input type="password" value={password} onChange={passwordHandler}
           className="input input-bordered w-full max-w-xs" />
         </label>
       </div><p className='text-red-500'>{error}</p>
